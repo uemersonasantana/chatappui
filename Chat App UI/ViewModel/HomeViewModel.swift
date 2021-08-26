@@ -24,4 +24,18 @@ class HomeViewModel: ObservableObject {
     
     // Piced expanded tab
     @Published var pickedTab = "Media"
+    
+    // Send message
+    func sendMessage(user: RecentMessage) {
+        if message != ""{
+            let index = msgs.firstIndex { (currentUser) -> Bool in
+                return currentUser.id == user.id
+            } ?? -1
+            
+            if index != -1 {
+                msgs[index].allMsgs.append(Message(message: message, myMessage: true))
+                message = ""
+            }
+        }
+    }
 }
